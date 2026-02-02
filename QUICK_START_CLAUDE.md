@@ -10,7 +10,7 @@
 你好！我正在开发一个 GTM 助手项目。
 
 请先阅读以下文件快速了解项目：
-1. CLAUDE_CONTEXT.md - 完整项目上下文
+1. CLAUDE.md - 完整项目上下文
 2. README.md - 项目说明
 
 项目简介：
@@ -30,14 +30,14 @@
 ```
 我想给 GTM 助手添加新功能：[描述功能]
 
-请先阅读 CLAUDE_CONTEXT.md 了解项目架构，然后帮我规划实现步骤。
+请先阅读 CLAUDE.md 了解项目架构，然后帮我规划实现步骤。
 ```
 
 ### 如果要修复 Bug：
 ```
 GTM 助手遇到问题：[描述问题]
 
-请先阅读 CLAUDE_CONTEXT.md，然后帮我排查问题。
+请先阅读 CLAUDE.md，然后帮我排查问题。
 
 相关文件可能是：
 - src/aiService.js
@@ -50,7 +50,7 @@ GTM 助手遇到问题：[描述问题]
 我需要处理部署相关的事情：[描述需求]
 
 请先阅读：
-1. CLAUDE_CONTEXT.md - 了解部署状态
+1. CLAUDE.md - 了解部署状态
 2. DEPLOY.md - 部署文档
 
 然后帮我处理。
@@ -60,7 +60,7 @@ GTM 助手遇到问题：[描述问题]
 ```
 我需要配置 GitHub Actions 自动同步到团队仓库。
 
-请先阅读 CLAUDE_CONTEXT.md 了解当前进展，
+请先阅读 CLAUDE.md 了解当前进展，
 然后查看 .github/workflows/sync-to-team-repo.yml，
 帮我完成配置。
 
@@ -76,13 +76,13 @@ GTM 助手遇到问题：[描述问题]
 1. **明确当前任务**
    ```
    当前任务：实现文档上传功能
-   相关进度：查看 CLAUDE_CONTEXT.md 中的待办事项
+   相关进度：查看 CLAUDE.md 中的待办事项
    ```
 
 2. **指定相关文件**
    ```
    请先读取以下文件：
-   - CLAUDE_CONTEXT.md（项目背景）
+   - CLAUDE.md（项目背景）
    - src/App.jsx（主组件）
    - api/chat.js（后端 API）
    ```
@@ -101,7 +101,7 @@ GTM 助手遇到问题：[描述问题]
 ## 🔖 常用文件路径速查
 
 **项目文档**：
-- `CLAUDE_CONTEXT.md` - 项目上下文（最重要！）
+- `CLAUDE.md` - 项目上下文（最重要！）
 - `README.md` - 项目说明
 - `DEPLOY.md` - 部署文档
 - `MIGRATION.md` - 迁移指南
