@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(code:*)",
+      "Bash(cmd.exe /c view-chat-history.bat)",
+      "Bash(start code \"C:\\\\Users\\\\83768\\\\.claude\\\\projects\\\\e-----vibe-coding-Claude-Code-gtm-assistant-ai-version\\\\24a291d5-5997-4fbf-855b-da4a8cac7cea.jsonl\")",
+      "Bash(python:*)",
+      "Bash(timeout:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
