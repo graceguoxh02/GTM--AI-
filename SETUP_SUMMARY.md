@@ -16,11 +16,13 @@
 - ✅ 支持降级保护
 
 ### 3. 环境配置
-已配置的 API Keys：
-- VITE_QWEN_API_KEY - 通义千问
-- VITE_DEEPSEEK_API_KEY - DeepSeek
-- VITE_GLM_API_KEY - 智谱 GLM
-- VITE_MOONSHOT_API_KEY - Kimi
+已配置的 API Keys（后端安全存储，无 VITE_ 前缀）：
+- QWEN_API_KEY - 通义千问
+- DEEPSEEK_API_KEY - DeepSeek
+- GLM_API_KEY - 智谱 GLM
+- MOONSHOT_API_KEY - Kimi
+
+**⚠️ 重要：** 环境变量在后端 Vercel Serverless Functions 中使用，前端通过 `/api/chat` 调用
 
 ### 4. 项目依赖
 - ✅ 更新了 package.json（移除 @anthropic-ai/sdk）

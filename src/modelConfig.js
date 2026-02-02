@@ -163,31 +163,8 @@ export function getFallbackModel(provider, model) {
   return { provider: 'DEEPSEEK', model: 'deepseek-chat' };
 }
 
-/**
- * 获取 API Key 的环境变量名称
- */
-export function getAPIKeyEnvName(provider) {
-  const envMap = {
-    QWEN: 'VITE_QWEN_API_KEY',
-    DEEPSEEK: 'VITE_DEEPSEEK_API_KEY',
-    GLM: 'VITE_GLM_API_KEY',
-    MOONSHOT: 'VITE_MOONSHOT_API_KEY'
-  };
-  return envMap[provider];
-}
-
-/**
- * 检查模型是否配置
- */
-export function isModelConfigured(provider) {
-  const envName = getAPIKeyEnvName(provider);
-  const apiKey = import.meta.env[envName];
-  return !!apiKey && apiKey !== 'your_api_key_here';
-}
-
-/**
- * 获取所有已配置的模型
- */
-export function getConfiguredProviders() {
-  return Object.keys(MODEL_PROVIDERS).filter(provider => isModelConfigured(provider));
-}
+// ============================================
+// 注意：API Keys 现在由后端安全管理
+// ============================================
+// 前端通过 /api/chat 调用后端，无需直接访问环境变量
+// 模型配置检查在后端进行，前端只负责发送请求

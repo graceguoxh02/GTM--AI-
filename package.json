@@ -16,7 +16,8 @@
     "autoprefixer": "^10.4.16"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vercel dev",
+    "dev:vite": "vite",
     "build": "vite build",
     "preview": "vite preview"
   }

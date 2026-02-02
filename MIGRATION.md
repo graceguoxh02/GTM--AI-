@@ -2,6 +2,8 @@
 
 本文档帮助您从原 Claude 版本迁移到国产大模型版本。
 
+> **⚠️ 注意：** 本项目已升级为后端 API 架构，API Keys 在后端 Vercel Serverless Functions 中安全存储，前端通过 `/api/chat` 调用。环境变量**不使用** `VITE_` 前缀。
+
 ## 🎯 迁移概览
 
 ### 主要变更
@@ -9,8 +11,9 @@
 | 项目 | 旧版本 | 新版本 |
 |------|--------|--------|
 | **AI 模型** | Claude 3.5 Sonnet | 通义千问、DeepSeek、智谱GLM、Kimi |
-| **SDK 依赖** | @anthropic-ai/sdk | 无需 SDK（直接调用 API） |
-| **API Key** | VITE_ANTHROPIC_API_KEY | VITE_QWEN_API_KEY 等 |
+| **SDK 依赖** | @anthropic-ai/sdk | 无需 SDK（后端 API） |
+| **API Key** | VITE_ANTHROPIC_API_KEY | QWEN_API_KEY 等（后端） |
+| **API 架构** | 前端直接调用 | ✅ 后端 Vercel Functions |
 | **多模态** | 不支持 | ✅ 支持图片、文档 |
 | **成本** | $100-200/月 | ¥20-50/月 |
 | **国内访问** | 需要科学上网 | ✅ 直接访问 |
@@ -43,11 +46,15 @@ npm install
 # VITE_ANTHROPIC_API_KEY=sk-ant-xxx
 
 # 添加新配置（至少配置一个）
-VITE_QWEN_API_KEY=your_api_key_here
-VITE_DEEPSEEK_API_KEY=your_api_key_here
-VITE_GLM_API_KEY=your_api_key_here
-VITE_MOONSHOT_API_KEY=your_api_key_here
+# ⚠️ 注意：无 VITE_ 前缀（后端专用）
+QWEN_API_KEY=your_api_key_here
+DEEPSEEK_API_KEY=your_api_key_here
+GLM_API_KEY=your_api_key_here
+MOONSHOT_API_KEY=your_api_key_here
 ```
+
+**本地开发：** 配置在 `.env` 文件中
+**Vercel 部署：** 在 Vercel 项目设置 → Environment Variables 中配置
 
 ### 4. 获取新的 API Key
 
@@ -89,11 +96,11 @@ npm run dev
 
 ### 1. API 调用方式
 
-**旧版本（Claude）:**
+**旧版本（Claude - 前端直接调用）:**
 ```javascript
 const client = new Anthropic({
   apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
-  dangerouslyAllowBrowser: true
+  dangerouslyAllowBrowser: true  // 不安全！
 });
 
 const response = await client.messages.create({
@@ -102,9 +109,20 @@ const response = await client.messages.create({
 });
 ```
 
-**新版本（国产模型）:**
+**新版本（国产模型 - 后端 API）:**
 ```javascript
-// 智能路由自动选择最优模型
+// 前端调用后端 API（API Keys 安全保护）
+const response = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    provider: 'QWEN',  // 由智能路由自动选择
+    model: 'qwen-turbo',
+    messages: messages
+  })
+});
+
+// 或使用封装好的智能路由函数
 const response = await smartChatWithAI(
   scenario,      // 场景类型
   systemPrompt,

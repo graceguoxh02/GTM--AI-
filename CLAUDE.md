@@ -92,9 +92,10 @@ MOONSHOT_API_KEY=sk-bvlzc3wOMwGe5OkXWtqQuxstsUrRPq6uEm7ncacXQYmjTAUB
 - **环境变量**: ✅ 已在 Vercel 配置（4 个 API Keys）
 
 ### 本地开发
-- **运行命令**: `npm run dev`
-- **访问地址**: http://localhost:5174（端口 5173 被占用）
-- **开发服务器**: ✅ 正在后台运行
+- **运行命令**: `npm run dev`（使用 Vercel CLI，**必须**）
+- **访问地址**: http://localhost:3000（Vercel CLI）
+- **备选命令**: `npm run dev:vite`（仅前端，无 AI 功能）
+- **为什么用 Vercel CLI**: 本地运行 Serverless Functions，AI 才能正常工作
 
 ## ✅ 已完成的工作
 

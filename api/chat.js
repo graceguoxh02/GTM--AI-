@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         break;
 
       case 'DEEPSEEK':
-        apiUrl = 'https://api.deepseek.com/chat/completions';
+        apiUrl = 'https://api.deepseek.com/v1/chat/completions';
         headers = {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',

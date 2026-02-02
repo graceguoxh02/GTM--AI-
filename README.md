@@ -81,15 +81,20 @@ cp .env.example .env
 
 ```env
 # 推荐优先配置（多模态能力强）
-VITE_QWEN_API_KEY=sk-xxx
+QWEN_API_KEY=sk-xxx
 
 # 推荐配置（性价比最高，几乎免费）
-VITE_DEEPSEEK_API_KEY=sk-xxx
+DEEPSEEK_API_KEY=sk-xxx
 
 # 可选配置
-VITE_GLM_API_KEY=sk-xxx
-VITE_MOONSHOT_API_KEY=sk-xxx
+GLM_API_KEY=sk-xxx
+MOONSHOT_API_KEY=sk-xxx
 ```
+
+**⚠️ 重要说明：**
+- 环境变量**没有** `VITE_` 前缀（后端专用，前端无法访问）
+- 本地开发：配置在 `.env` 文件中
+- Vercel 部署：在 Vercel 项目设置 → Environment Variables 中配置
 
 #### 如何获取 API Key：
 
@@ -107,11 +112,25 @@ VITE_MOONSHOT_API_KEY=sk-xxx
 
 ### 3. 启动开发服务器
 
+**⚠️ 重要：必须使用 Vercel CLI 来运行本地开发环境**
+
 ```bash
+# 使用 Vercel CLI（推荐，支持后端 API）
 npm run dev
+
+# 如果提示需要登录 Vercel
+vercel login
+
+# 或者只运行前端（无后端 API，AI 功能不可用）
+npm run dev:vite
 ```
 
-浏览器打开 http://localhost:5173
+浏览器打开 http://localhost:3000 (Vercel CLI) 或 http://localhost:5173 (Vite)
+
+**为什么要用 Vercel CLI？**
+- ✅ 本地运行 Vercel Serverless Functions ([api/chat.js](api/chat.js))
+- ✅ 模拟生产环境
+- ✅ AI 功能正常工作
 
 ## 📖 使用指南
 
