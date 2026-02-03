@@ -42,10 +42,13 @@
 │   └── prompts.js           # 提示词系统
 ├── api/
 │   └── chat.js              # Vercel Serverless Function (安全处理 AI 调用)
+├── dev-server.js            # 本地开发 API 服务器 (仅本地使用)
 ├── .env                     # 环境变量 (API Keys，不提交到 Git)
 ├── .env.example             # 环境变量模板
 ├── vercel.json              # Vercel 配置
-└── DEPLOY.md                # 部署文档
+├── vite.config.js           # Vite 配置 (包含 API 代理)
+├── DEPLOY.md                # 部署文档
+└── DEPLOY_CHECKLIST.md      # 部署检查清单
 ```
 
 ## 🔒 安全架构（重要！）
@@ -123,6 +126,17 @@ MOONSHOT_API_KEY=sk-bvlzc3wOMwGe5OkXWtqQuxstsUrRPq6uEm7ncacXQYmjTAUB
 - [x] 配置 Vercel 环境变量
 - [x] 创建 GitHub Actions 自动同步工作流
 
+### Phase 4: 本地开发环境（已完成 - 2026-02-03）
+- [x] 创建本地开发 API 服务器 (`dev-server.js`)
+- [x] 配置 Vite 代理转发 API 请求
+- [x] 添加 Express 和 dotenv 依赖
+- [x] 配置 package.json 支持 ES modules
+- [x] 测试本地开发环境（API + 前端）
+- [x] 创建部署检查清单 (`DEPLOY_CHECKLIST.md`)
+- [x] 推送代码到 GitHub (commit: 0c8ca2b)
+
+**说明**: Vercel CLI 在本地开发时无法同时运行 Vite 和 Serverless Functions，因此创建了独立的开发服务器。生产环境仍使用 Vercel Serverless Functions。
+
 ## 🚧 待办事项
 
 ### 高优先级
@@ -165,11 +179,20 @@ MOONSHOT_API_KEY=sk-bvlzc3wOMwGe5OkXWtqQuxstsUrRPq6uEm7ncacXQYmjTAUB
 
 ## 🔍 常见问题
 
-### Q: 如何启动项目？
+### Q: 如何启动本地开发环境？
+**本地开发需要运行两个服务器**（在两个终端窗口）：
+
+终端 1 - API 服务器：
+```bash
+npm run dev:api
+```
+
+终端 2 - 前端：
 ```bash
 npm run dev
 ```
-访问 http://localhost:5174
+
+然后访问 http://localhost:5173
 
 ### Q: 如何部署更新？
 ```bash
@@ -207,10 +230,13 @@ Vercel 会自动部署（2-3 分钟）
 ## 🎯 下一步行动
 
 **当前优先级**：
-1. ✅ 完成 GitHub Actions 配置（创建 Token，更新仓库地址）
-2. 测试自动同步功能
+1. ⚠️ **在 Vercel Dashboard 配置环境变量**（必须完成才能使用）
+   - 进入 Settings → Environment Variables
+   - 添加 4 个 API Keys（不要加 VITE_ 前缀）
+   - 保存后重新部署
+2. 测试 Vercel 部署是否正常工作
 3. 实现文档上传 UI
-4. 添加数据持久化
+4. 添加数据持久化 (localStorage 或后端)
 
 ---
 
@@ -227,5 +253,7 @@ Vercel 会自动部署（2-3 分钟）
 
 ---
 
-**最后更新**: 2026-02-02
-**项目状态**: ✅ 开发中，已部署到 Vercel，功能完整可用
+**最后更新**: 2026-02-03
+**项目状态**: ✅ 本地开发环境已配置，代码已推送到 GitHub，待配置 Vercel 环境变量
+**GitHub 仓库**: https://github.com/graceguoxh02/GTM--AI-.git
+**最新提交**: 0c8ca2b - Configure local development environment
